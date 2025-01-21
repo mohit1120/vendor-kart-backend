@@ -1,8 +1,8 @@
 import { Context, Next } from "koa";
 import { utils } from "../../utils/utils";
 import { constants } from "../../constants/constants";
-import { RequestResponseLog } from "../../entities/request_response_logs";
 import { LogsDBImpl } from "../../dbops/request_response_logs";
+import { RequestResponseLog } from "../../entities/request_response_logs";
 
 /* -------------------------------------------------------------------------- */
 /*                                  Interface                                 */
