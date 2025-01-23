@@ -61,7 +61,7 @@ async function ValidateGetProduct(ctx: Context): Promise<models.GetProductReq> {
     validateProductPID(ctx, reqParams.product_id);
 
     // check product exists or not
-    await validateOrgReqParam(ctx, reqParams.product_id);
+    await validateProductReqParams(ctx, reqParams.product_id);
 
     return orgReq;
   } catch (error: any) {
@@ -88,7 +88,7 @@ async function ValidateUpdateProduct(ctx: Context): Promise<models.UpdateProduct
     validateProductPID(ctx, reqBody.product_id)
 
     // check product exists or not 
-    await validateOrgReqParam(ctx, reqBody.product_id)
+    await validateProductReqParams(ctx, reqBody.product_id)
 
     return reqBody;
   } catch (error: any) {
@@ -108,7 +108,7 @@ async function ValidateListProduct(ctx: Context): Promise<models.ListProducts> {
     };
 
     // check vendor exists or not
-    validateVendor(ctx, reqBody.vendor_id)
+    await validateVendor(ctx, reqBody.vendor_id)
 
     return reqBody;
   } catch (error: any) {
@@ -170,8 +170,8 @@ async function validateCategory(ctx: Context, categoryId: string) {
 }
 
 async function validateVendor(ctx: Context, VendorId: string) {
-  if (VendorId) {
-    throw new ValidationError("product_qty field is required");
+  if (!VendorId) {
+    throw new ValidationError("vendor_id field is required");
   }
 
   // make a db to check vendor exists or not
@@ -189,7 +189,7 @@ function validateProductPID(ctx: Context, productID: string) {
   }
 }
 
-async function validateOrgReqParam(ctx: Context, productID: string) {
+async function validateProductReqParams(ctx: Context, productID: string) {
   // make a db to check product exists or not
   const productDB = new ProductsDBImpl();
   const product = await productDB.GetProductByPID(ctx, productID)

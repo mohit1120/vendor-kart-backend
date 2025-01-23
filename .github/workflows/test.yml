@@ -1,0 +1,73 @@
+name: vendor-kart-backend
+
+on:
+  push:
+    branches: ["main", "dev"]
+  pull_request:
+    branches: ["main", "dev"]
+
+jobs:
+  build:
+    runs-on: ${{matrix.os}}
+
+    strategy:
+      max-parallel: 24
+      matrix:
+        os: [ubuntu-latest]
+        node-version: [18.x]
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: rc_dashboard_local
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+      redis:
+        image: redis
+        ports:
+          - 6379:6379
+        options: >-
+          --health-cmd "redis-cli ping"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout migrations
+        uses: actions/checkout@v4
+        with:
+          repository: zoop/rc-dashboard-migrations
+          token: ${{ secrets.BACKEND }}
+          ref: ${{github.base_ref }}
+          path: rc-dashboard-migrations
+
+      - name: Run migrations
+        run: pwd && cd rc-dashboard-migrations && ls -la && cp example.env .env && npm install && npm run migrate && npm run seed
+
+      - uses: actions/checkout@v2
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Set environment variables
+        run: pwd && ls -la && cp example.env .env
+
+      - name: Intall dependencies && make build
+        run: npm i && npm run build
+
+      # - name: Run linter
+      #   run: npm run lint
+
+      - name: Run test
+        run: npm run test
+        timeout-minutes: 5

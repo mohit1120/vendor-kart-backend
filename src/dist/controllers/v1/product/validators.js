@@ -64,7 +64,7 @@ function ValidateGetProduct(ctx) {
             // validate product id
             validateProductPID(ctx, reqParams.product_id);
             // check product exists or not
-            yield validateOrgReqParam(ctx, reqParams.product_id);
+            yield validateProductReqParams(ctx, reqParams.product_id);
             return orgReq;
         }
         catch (error) {
@@ -89,7 +89,7 @@ function ValidateUpdateProduct(ctx) {
             // validate product id
             validateProductPID(ctx, reqBody.product_id);
             // check product exists or not 
-            yield validateOrgReqParam(ctx, reqBody.product_id);
+            yield validateProductReqParams(ctx, reqBody.product_id);
             return reqBody;
         }
         catch (error) {
@@ -108,7 +108,7 @@ function ValidateListProduct(ctx) {
                 vendor_id: vendor_id || ""
             };
             // check vendor exists or not
-            validateVendor(ctx, reqBody.vendor_id);
+            yield validateVendor(ctx, reqBody.vendor_id);
             return reqBody;
         }
         catch (error) {
@@ -163,8 +163,8 @@ function validateCategory(ctx, categoryId) {
 }
 function validateVendor(ctx, VendorId) {
     return __awaiter(this, void 0, void 0, function* () {
-        if (VendorId) {
-            throw new errors_1.ValidationError("product_qty field is required");
+        if (!VendorId) {
+            throw new errors_1.ValidationError("vendor_id field is required");
         }
         // make a db to check vendor exists or not
         const vendorDB = new vendors_1.VendorsDBImpl();
@@ -179,7 +179,7 @@ function validateProductPID(ctx, productID) {
         throw new errors_1.ValidationError("product_id field is required");
     }
 }
-function validateOrgReqParam(ctx, productID) {
+function validateProductReqParams(ctx, productID) {
     return __awaiter(this, void 0, void 0, function* () {
         // make a db to check product exists or not
         const productDB = new products_1.ProductsDBImpl();

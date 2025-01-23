@@ -10,55 +10,51 @@ exports.Shipments = Shipments;
 try {
     // Initialize the Shipments model with the corresponding schema
     Shipments.init({
-        shipment_id: {
+        ID: {
             type: sequelize_1.DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
             field: "shipments_id"
         },
-        shipment_pid: {
+        PID: {
             type: sequelize_1.DataTypes.STRING(50),
             allowNull: false,
             unique: true,
             field: "shipments_pid"
         },
-        order_id: {
+        OrderID: {
             type: sequelize_1.DataTypes.STRING(50),
             allowNull: false,
             field: "order_id"
         },
-        order_item_id: {
+        OrderItemID: {
             type: sequelize_1.DataTypes.STRING(50),
             allowNull: false,
             field: "order_item_id"
         },
-        status: {
+        Status: {
             type: sequelize_1.DataTypes.STRING(50),
             allowNull: false,
+            defaultValue: "Pending",
             field: "status"
         },
-        tracking_number: {
+        TrackingNo: {
             type: sequelize_1.DataTypes.STRING(100),
             allowNull: false,
             field: "tracking_number"
         },
-        created_at: {
+        CreatedAt: {
             type: sequelize_1.DataTypes.DATE,
             allowNull: false,
             defaultValue: sequelize_1.DataTypes.NOW,
             field: "created_at"
         },
-        updated_at: {
+        UpdatedAt: {
             type: sequelize_1.DataTypes.DATE,
             allowNull: false,
             defaultValue: sequelize_1.DataTypes.NOW,
             field: "updated_at"
         },
-        is_deleted: {
-            type: sequelize_1.DataTypes.BOOLEAN,
-            defaultValue: false,
-            field: "is_deleted"
-        }
     }, {
         sequelize: connection_1.Database.getInstance().getSequelize(),
         modelName: "Shipments",

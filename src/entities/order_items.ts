@@ -7,9 +7,8 @@ interface OrderItem {
   OrderID?: string;
   ProductID?: string;
   Price?: number;
-  Quantity?: number;
+  Qty?: number;
   UserID?: string;
-  VendorID?: string;
   CreatedAt?: Date;
   UpdatedAt?: Date;
 }
@@ -24,9 +23,8 @@ try {
       OrderID: { type: DataTypes.STRING(50), allowNull: false, field: "order_id" },
       ProductID: { type: DataTypes.STRING(50), allowNull: false, field: "product_id" },
       Price: { type: DataTypes.DECIMAL(10, 2), allowNull: false, field: "price" },
-      Quantity: { type: DataTypes.INTEGER, allowNull: false, field: "qty" },
+      Qty: { type: DataTypes.INTEGER, allowNull: false, field: "qty" },
       UserID: { type: DataTypes.STRING(50), allowNull: false, field: "user_id" },
-      VendorID: { type: DataTypes.STRING(50), allowNull: false, field: "vendor_id" },
       CreatedAt: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW, field: "created_at" },
       UpdatedAt: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW, field: "updated_at" },
     },

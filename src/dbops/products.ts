@@ -21,7 +21,7 @@ class ProductsDBImpl implements Interface {
   /* ------------------------------- CREATE PRODUCT ------------------------------- */
   async CreateProduct(ctx: Context, ProductData: Product): Promise<Product> {
     try {
-      ProductData.PID = utils.GeneratePrefixedUUID("Products");
+      ProductData.PID = utils.GeneratePrefixedUUID("product");
       const Product = await Products.create(ProductData);
 
       const res: Product = Product.toJSON() as Product;
