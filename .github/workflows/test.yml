@@ -22,7 +22,7 @@ jobs:
         env:
           POSTGRES_USER: postgres
           POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: rc_dashboard_local
+          POSTGRES_DB: postgres
         ports:
           - 5432:5432
         options: >-
@@ -30,28 +30,18 @@ jobs:
           --health-interval 10s
           --health-timeout 5s
           --health-retries 5
-
-      redis:
-        image: redis
-        ports:
-          - 6379:6379
-        options: >-
-          --health-cmd "redis-cli ping"
-          --health-interval 10s
-          --health-timeout 5s
-          --health-retries 5
-
+          
     steps:
       - name: Checkout migrations
         uses: actions/checkout@v4
         with:
-          repository: zoop/rc-dashboard-migrations
+          repository: vendor-kart-backend-migrations
           token: ${{ secrets.BACKEND }}
           ref: ${{github.base_ref }}
-          path: rc-dashboard-migrations
+          path: vendor-kart-backend-migrations
 
       - name: Run migrations
-        run: pwd && cd rc-dashboard-migrations && ls -la && cp example.env .env && npm install && npm run migrate && npm run seed
+        run: pwd && cd vendor-kart-backend-migrations && ls -la && cp example.env .env && npm install && npm run migrate && npm run seed
 
       - uses: actions/checkout@v2
       - name: Use Node.js ${{ matrix.node-version }}
