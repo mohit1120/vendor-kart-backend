@@ -35,7 +35,7 @@ jobs:
       - name: Checkout migrations
         uses: actions/checkout@v4
         with:
-          repository: vendor-kart-backend-migrations
+          repository: mohit1120/vendor-kart-backend-migrations
           token: ${{ secrets.BACKEND }}
           ref: ${{github.base_ref }}
           path: vendor-kart-backend-migrations
