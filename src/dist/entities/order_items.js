@@ -13,9 +13,8 @@ try {
         OrderID: { type: sequelize_1.DataTypes.STRING(50), allowNull: false, field: "order_id" },
         ProductID: { type: sequelize_1.DataTypes.STRING(50), allowNull: false, field: "product_id" },
         Price: { type: sequelize_1.DataTypes.DECIMAL(10, 2), allowNull: false, field: "price" },
-        Quantity: { type: sequelize_1.DataTypes.INTEGER, allowNull: false, field: "qty" },
+        Qty: { type: sequelize_1.DataTypes.INTEGER, allowNull: false, field: "qty" },
         UserID: { type: sequelize_1.DataTypes.STRING(50), allowNull: false, field: "user_id" },
-        VendorID: { type: sequelize_1.DataTypes.STRING(50), allowNull: false, field: "vendor_id" },
         CreatedAt: { type: sequelize_1.DataTypes.DATE, allowNull: false, defaultValue: sequelize_1.DataTypes.NOW, field: "created_at" },
         UpdatedAt: { type: sequelize_1.DataTypes.DATE, allowNull: false, defaultValue: sequelize_1.DataTypes.NOW, field: "updated_at" },
     }, { sequelize: connection_1.Database.getInstance().getSequelize(), modelName: "OrderItem", tableName: "order_items", timestamps: false });

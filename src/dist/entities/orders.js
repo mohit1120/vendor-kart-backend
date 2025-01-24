@@ -12,6 +12,7 @@ try {
         PID: { type: sequelize_1.DataTypes.STRING(50), allowNull: false, unique: true, field: "orders_pid" },
         UserID: { type: sequelize_1.DataTypes.STRING(50), allowNull: false, field: "user_id" },
         TotalAmount: { type: sequelize_1.DataTypes.DECIMAL(10, 2), allowNull: false, field: "total_amount" },
+        Status: { type: sequelize_1.DataTypes.STRING, allowNull: false, defaultValue: "Pending", field: "status" },
         CreatedAt: { type: sequelize_1.DataTypes.DATE, allowNull: false, defaultValue: sequelize_1.DataTypes.NOW, field: "created_at" },
         UpdatedAt: { type: sequelize_1.DataTypes.DATE, allowNull: false, defaultValue: sequelize_1.DataTypes.NOW, field: "updated_at" },
     }, { sequelize: connection_1.Database.getInstance().getSequelize(), modelName: "Order", tableName: "orders", timestamps: false });

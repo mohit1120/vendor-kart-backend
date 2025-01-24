@@ -21,7 +21,7 @@ class ProductsDBImpl {
     CreateProduct(ctx, ProductData) {
         return __awaiter(this, void 0, void 0, function* () {
             try {
-                ProductData.PID = utils_1.utils.GeneratePrefixedUUID("Products");
+                ProductData.PID = utils_1.utils.GeneratePrefixedUUID("product");
                 const Product = yield products_1.Products.create(ProductData);
                 const res = Product.toJSON();
                 return res;

@@ -7,8 +7,7 @@ interface CartLineItem {
   UserID?: string;
   CartID?: string;
   ProductID?: string;
-  PaymentStatus?: string;
-  Quantity?: number;
+  Qty?: number;
   Price?: number;
   CreatedAt?: Date;
   UpdatedAt?: Date;
@@ -24,8 +23,7 @@ try {
       UserID: { type: DataTypes.STRING(50), allowNull: false, field: "user_id" },
       CartID: { type: DataTypes.STRING(50), allowNull: false, field: "cart_id" },
       ProductID: { type: DataTypes.STRING(50), allowNull: false, field: "product_id" },
-      PaymentStatus: { type: DataTypes.STRING(20), allowNull: true, field: "payment_status" },
-      Quantity: { type: DataTypes.INTEGER, allowNull: false, field: "quantity" },
+      Qty: { type: DataTypes.INTEGER, allowNull: false, field: "qty" },
       Price: { type: DataTypes.DECIMAL(10, 2), allowNull: false, field: "price" },
       CreatedAt: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW, field: "created_at" },
       UpdatedAt: { type: DataTypes.DATE, allowNull: false, defaultValue: DataTypes.NOW, field: "updated_at" },
